@@ -2,7 +2,10 @@
 
 A new Flutter project.
 
-## Getting Started
+## Group Members:
+1. Nicholas Wong
+2. John Luke Joeshua
+3. Ranveer Singh Balleh
 
 This project is a starting point for a Flutter application.
 
