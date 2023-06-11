@@ -1,8 +1,8 @@
 # Food Delivery App
 
 ## Group Members:
-Nicholas Wong 
-John Luke Joeshua
-Ranveer Singh Balleh
+1. Nicholas Wong <br />
+2. John Luke Joeshua <br />
+3. Ranveer Singh Balleh
 
 
