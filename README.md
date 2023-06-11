@@ -1,5 +1,8 @@
 # Food Delivery App
 
-## Getting Started
+## Group Members:
+Nicholas Wong 
+John Luke Joeshua
+Ranveer Singh Balleh
 
 
