@@ -1,4 +1,4 @@
-# Food Delivery App
+# Expense Tracker App
 
 ## Group Members:
 1. Nicholas Wong <br />
