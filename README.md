@@ -1,4 +1,4 @@
-# Expense Tracker App
+# Expense Tracker App - Budget Buddy
 
 ## Group 8 Members:
 1. Nicholas Wong <br />
