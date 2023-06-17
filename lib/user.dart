@@ -9,6 +9,4 @@ class CurrentUser {
 
   CurrentUser({required this.id, required this.name, required this.email });
 
-
-
 }
