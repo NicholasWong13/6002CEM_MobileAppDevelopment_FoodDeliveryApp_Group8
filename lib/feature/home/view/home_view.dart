@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:budgetbuddy/core/enums/padding/padding_enums.dart';
@@ -8,6 +9,8 @@ import 'package:budgetbuddy/product/widgets/card/balance_card/balance_card.dart'
 import 'package:budgetbuddy/core/components/text_tr/text_tr.dart';
 import 'package:budgetbuddy/product/widgets/lottie/empty_list/empty_list_lottie.dart';
 import 'package:budgetbuddy/product/widgets/transaction_list/transaction_list.dart';
+
+
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -21,6 +24,18 @@ class HomeView extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      //Use this to Log Out user
+                      FirebaseAuth.instance.signOut();
+                    },
+                    child: Text('Sign Out'),
+                  ),
+                ),
+              ),
               Center(
                 child: _balanceCard(cubit, state),
               ),

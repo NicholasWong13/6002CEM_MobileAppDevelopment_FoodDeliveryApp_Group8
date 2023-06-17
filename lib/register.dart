@@ -1,159 +1,102 @@
-import 'dart:ui';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:budgetbuddy/main.dart';
-import 'package:budgetbuddy/user.dart';
+import 'package:flutter/material.dart';
 
-import 'database.dart';
+import 'auth.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+
+class Register extends StatefulWidget {
+   Register({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _SignUpState extends State<SignUp> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
+class _RegisterState extends State<Register> {
+  //Use this check if it's login or register
+  final bool _isLogin = false;
+
+  //Use this form key to validate user's input
   final _formKey = GlobalKey<FormState>();
+
+  //Use this to store user inputs
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _passwordController = TextEditingController();
+
+  handleSubmit() async {
+    //Validate user inputs using formkey
+    if (_formKey.currentState!.validate()) {
+      //Get inputs from the controllers
+      final email = _emailController.value.text;
+      final password = _passwordController.value.text;
+      //Check if is login or register
+      if(_isLogin) {
+        await Auth().signInWithEmailAndPassword(email, password);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                AuthScreen()));
+      } else {
+        await Auth().registerWithEmailAndPassword(email, password);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text('Register User'),
       ),
-      body: GestureDetector(
-        onTap: (){
-          FocusScope.of(context).unfocus();
-        },
-        child: SingleChildScrollView(
-          child: Center(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                    child: CircleAvatar(backgroundImage: AssetImage('assets/images/logo.png',),radius: 80.0,),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextFormField(
-                      validator: (value) {
-                        final bool emailValid = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value!);
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                      controller: nameController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(90.0),
-                          ),
-                          labelText: 'Name',
-                          hintText: 'Enter Name.'),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextFormField(
-                      validator: (value) {
-                        final bool emailValid = RegExp(
-                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value!);
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        } else if (!emailValid) {
-                          return 'Please enter a valid email';
-                        }
-                        return null;
-                      },
-                      controller: emailController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(90.0),
-                          ),
-                          labelText: 'Email',
-                          hintText: 'Enter valid email.'),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                    child: TextFormField(
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        } else if (value.length < 6) {
-                          return 'Password must be more than 6 digits.';
-                        }
-                        return null;
-                      },
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(90.0),
-                        ),
-                        labelText: 'Password',
-                      ),
-                    ),
-                  ),
-                  Container(
-                      padding: const EdgeInsets.all(20),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
-                          fixedSize: const Size(250.0, 40.0),
-                        ),
-                        child: const Text('Sign up'),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            signUp();
-                          }
-                        },
-                      )),
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          //Add form to key to the Form Widget
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                //Assign controller
+                controller:_emailController,
+                //Use this function to validate user input
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Email',
+                ),
               ),
-            ),
+              TextFormField(
+                //Assign controller
+                controller:_passwordController,
+                obscureText: true,
+                //Use this function to validate user
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                ),
+              ),
+              SizedBox(height: 16.0),
+              ElevatedButton(
+                //Assigned onPressed to submit
+                onPressed: handleSubmit,
+                //Conditionally show the button label
+                child: Text(_isLogin ? 'Login' :'Register'),
+              ),
+            ],
           ),
         ),
       ),
     );
-  }
-
-  Future signUp() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-
-    try {
-      await DatabaseService.createUser(
-        emailController.text.trim(),
-        passwordController.text.trim(),
-        nameController.text.toString(),
-      );
-      // User creation successful
-    } catch (error) {
-      print('Error creating user: $error');
-      // Handle the error
-    }
-
-
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
