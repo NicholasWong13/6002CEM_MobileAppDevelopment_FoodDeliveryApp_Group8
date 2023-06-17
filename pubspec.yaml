@@ -38,6 +38,11 @@ dependencies:
   #Utils
   intl: ^0.17.0
   uuid: ^3.0.6
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
+  cloud_firestore: ^4.8.1
+  provider: ^6.0.5
+  firebase_ui_auth: ^1.4.3
 
 dev_dependencies:
   flutter_test:
