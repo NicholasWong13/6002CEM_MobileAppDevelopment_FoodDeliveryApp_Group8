@@ -1,4 +1,4 @@
-package com.example.wiseflow
+package com.example.budgetbuddy
 
 import io.flutter.embedding.android.FlutterActivity
 

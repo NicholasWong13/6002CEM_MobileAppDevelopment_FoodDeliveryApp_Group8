@@ -55,8 +55,38 @@ class _RegisterState extends State<Register> {
           //Add form to key to the Form Widget
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(height: 30,),
+
+              TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Your Name',
+                  labelText: 'Name',
+                  filled: true,
+                  fillColor: Colors.cyan.shade50,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.black,width: 3)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue,width: 3)
+                  ),
+                  prefixIcon: Icon(Icons.email_outlined),
+                  suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: () {},
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.next,
+              ),
+
+              SizedBox(height: 25,),
+
               TextFormField(
                 //Assign controller
                 controller:_emailController,
@@ -68,9 +98,34 @@ class _RegisterState extends State<Register> {
                   return null;
                 },
                 decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Your Email ID',
+                  labelText: 'Email',
+                  filled: true,
+                  fillColor: Colors.cyan.shade50,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                    borderSide: BorderSide(color: Colors.black,width: 3)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue,width: 3)
+                  ),
+                  prefixIcon: Icon(Icons.email_outlined),
+                  suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: () {
+                    _emailController.clear();
+                  },
+                  ),
                 ),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
               ),
+
+              SizedBox(height: 25,),
+
               TextFormField(
                 //Assign controller
                 controller:_passwordController,
@@ -84,14 +139,35 @@ class _RegisterState extends State<Register> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Password',
+                  filled: true,
+                  fillColor: Colors.cyan.shade50,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.black,width: 3)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue,width: 3)
+                  ),
+                  prefixIcon: Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(icon: Icon(Icons.visibility_off), onPressed: () {},
+                  ),
                 ),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 40.0),
+
               ElevatedButton(
                 //Assigned onPressed to submit
                 onPressed: handleSubmit,
                 //Conditionally show the button label
-                child: Text(_isLogin ? 'Login' :'Register'),
+                child: Text(_isLogin ? 'Login' :'Register',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
               ),
             ],
           ),

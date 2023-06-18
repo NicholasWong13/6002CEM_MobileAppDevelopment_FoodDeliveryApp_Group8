@@ -86,16 +86,18 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Welcome'),
+        title: Text('Welcome To Budget Buddy - Login'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(25.0),
         child: Form(
           //Add form to key to the Form Widget
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Image(image: AssetImage('assets/logo.jpg'),width: 140,),
+              SizedBox(height: 15,),
               TextFormField(
                 //Assign controller
                 controller:_emailController,
@@ -107,8 +109,33 @@ class AuthScreen extends StatelessWidget {
                   return null;
                 },
                 decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: 'Your Email ID',
+                  labelText: 'Email',
+                  filled: true,
+                  fillColor: Colors.cyan.shade50,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.black,width: 3)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue,width: 3)
+                  ),
+                  prefixIcon: Icon(Icons.email_outlined),
+                  suffixIcon: IconButton(icon: Icon(Icons.clear), onPressed: () {
+                    _emailController.clear();
+                  },
+                  ),
                 ),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
+              ),
+              SizedBox(
+                height: 20,
               ),
               TextFormField(
                 //Assign controller
@@ -123,9 +150,28 @@ class AuthScreen extends StatelessWidget {
                 },
                 decoration: InputDecoration(
                   hintText: 'Password',
+                  filled: true,
+                  fillColor: Colors.cyan.shade50,
+                  labelStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.black,width: 3)
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: BorderSide(color: Colors.blue,width: 3)
+                  ),
+                  prefixIcon: Icon(Icons.lock_outline),
+                  suffixIcon: IconButton(icon: Icon(Icons.visibility_off), onPressed: () {},
+                  ),
                 ),
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 30.0),
               Row(
                 children: [
                   ElevatedButton(
@@ -133,9 +179,12 @@ class AuthScreen extends StatelessWidget {
                       handleSubmit();
                     },
                     //Conditionally show the button label
-                    child: Text('Login'),
+                    child: Text('Login' ,
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
                   ),
-                  SizedBox(width: 16.0),
+                  SizedBox(
+                      width: 50.0,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -145,7 +194,8 @@ class AuthScreen extends StatelessWidget {
                               Register()));
                     },
                     //Conditionally show the button label
-                    child: Text('Register'),
+                    child: Text('Register' ,
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
                   ),
                 ],
               )
@@ -156,3 +206,4 @@ class AuthScreen extends StatelessWidget {
     );
   }
 }
+
