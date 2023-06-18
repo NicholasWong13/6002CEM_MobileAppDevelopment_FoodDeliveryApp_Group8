@@ -71,7 +71,7 @@ class _CalculatorState extends State<Calculator> {
         ),
         child: Text(
           btnName,
-          style: const TextStyle(fontSize: 30, color: Colors.lightBlueAccent),
+          style: const TextStyle(fontSize: 30, color: Colors.white),
         ),
       ),
     );
